@@ -35,6 +35,10 @@ public partial class Form1 : Form
         checkBox_logVerbose.Checked = Settings.Default.LogVerbose;
         comboBox_browser.SelectedIndex = comboBox_browser.FindString(Settings.Default.Browser);
         textBox_format.Text = Settings.Default.Format;
+
+        string savedPattern = Settings.Default.NamingPattern;
+        if (!string.IsNullOrWhiteSpace(savedPattern))
+            textBox_namingPattern.Text = savedPattern;
         checkBox_logVerbose_CheckedChanged(new object(), EventArgs.Empty);
         _ = PrepareYtdlpAndFFmpegAsync().ConfigureAwait(true); // Use same thread
         Application.CurrentInputLanguage = InputLanguage.FromCulture(new CultureInfo("en-us")) ?? InputLanguage.DefaultInputLanguage;
@@ -135,6 +139,12 @@ public partial class Form1 : Form
         }
 
         Settings.Default.Browser = browser;
+
+        string namingPattern = textBox_namingPattern.Text;
+        Settings.Default.NamingPattern = namingPattern;
+
+        string freeText = textBox_freeText.Text;
+
         Settings.Default.Save();
 
         _ = DownloadAsync(id: id,
@@ -143,6 +153,8 @@ public partial class Form1 : Form
                           directory: directory!,
                           format: format,
                           browser: browser,
+                          namingTemplate: namingPattern,
+                          freeText: freeText,
                           cancellationToken: _cancellationTokenSource.Token).ConfigureAwait(false);
     }
 
@@ -218,6 +230,8 @@ public partial class Form1 : Form
                                      DirectoryInfo directory,
                                      string format,
                                      string browser,
+                                     string namingTemplate,
+                                     string freeText,
                                      CancellationToken? cancellationToken = default)
     {
         string oldText = button_start.Text;
@@ -232,8 +246,10 @@ public partial class Form1 : Form
                       = groupBox1.Enabled
                             = groupBox2.Enabled
                                   = groupBox3.Enabled
-                                        = button_redownloadDependencies.Enabled
-                                              = false;
+                                        = groupBox_naming.Enabled
+                                              = groupBox_freeText.Enabled
+                                                    = button_redownloadDependencies.Enabled
+                                                          = false;
 
             Application.DoEvents();
 
@@ -242,7 +258,9 @@ public partial class Form1 : Form
                                     end: end,
                                     outputDirectory: directory,
                                     format: format,
-                                    browser: browser);
+                                    browser: browser,
+                                    namingTemplate: namingTemplate,
+                                    freeText: freeText);
 
             await download.StartAsync(cancellationToken);
 
@@ -278,8 +296,10 @@ public partial class Form1 : Form
                 = groupBox1.Enabled
                       = groupBox2.Enabled
                             = groupBox3.Enabled
-                                  = button_redownloadDependencies.Enabled
-                                        = true;
+                                  = groupBox_naming.Enabled
+                                        = groupBox_freeText.Enabled
+                                              = button_redownloadDependencies.Enabled
+                                                    = true;
 
             tableLayoutPanel_segment.Enabled = checkBox_segment.Checked;
             button_start.Text = oldText;

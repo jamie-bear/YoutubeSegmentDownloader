@@ -62,6 +62,10 @@
             comboBox_browser = new ComboBox();
             groupBox3 = new GroupBox();
             textBox_format = new TextBox();
+            groupBox_naming = new GroupBox();
+            textBox_namingPattern = new TextBox();
+            groupBox_freeText = new GroupBox();
+            textBox_freeText = new TextBox();
             groupBox1 = new GroupBox();
             tableLayoutPanel4 = new TableLayoutPanel();
             tableLayoutPanel5 = new TableLayoutPanel();
@@ -169,8 +173,8 @@
             // checkBox_segment
             // 
             resources.ApplyResources(checkBox_segment, "checkBox_segment");
-            checkBox_segment.Checked = true;
-            checkBox_segment.CheckState = CheckState.Checked;
+            checkBox_segment.Checked = false;
+            checkBox_segment.CheckState = CheckState.Unchecked;
             checkBox_segment.Name = "checkBox_segment";
             toolTip1.SetToolTip(checkBox_segment, resources.GetString("checkBox_segment.ToolTip"));
             checkBox_segment.UseVisualStyleBackColor = true;
@@ -184,6 +188,7 @@
             tableLayoutPanel_segment.Controls.Add(label6, 0, 0);
             tableLayoutPanel_segment.Controls.Add(textBox_start, 0, 1);
             tableLayoutPanel_segment.Controls.Add(label5, 1, 0);
+            tableLayoutPanel_segment.Enabled = false;
             tableLayoutPanel_segment.Name = "tableLayoutPanel_segment";
             // 
             // textBox_end
@@ -259,6 +264,8 @@
             panel_main.Controls.Add(richTextBoxLogControl1);
             panel_main.Controls.Add(hiddenlabel2);
             panel_main.Controls.Add(hiddenlabel1);
+            panel_main.Controls.Add(groupBox_freeText);
+            panel_main.Controls.Add(groupBox_naming);
             panel_main.Controls.Add(tableLayoutPanel2);
             panel_main.Controls.Add(button_redownloadDependencies);
             panel_main.Controls.Add(checkBox_logVerbose);
@@ -326,9 +333,40 @@
             textBox_format.Name = "textBox_format";
             textBox_format.TabStop = false;
             toolTip1.SetToolTip(textBox_format, resources.GetString("textBox_format.ToolTip"));
-            // 
+            //
+            // groupBox_naming
+            //
+            groupBox_naming.Controls.Add(textBox_namingPattern);
+            groupBox_naming.Name = "groupBox_naming";
+            groupBox_naming.TabStop = false;
+            groupBox_naming.Text = "File Naming Pattern";
+            groupBox_naming.Dock = DockStyle.Top;
+            groupBox_naming.Size = new System.Drawing.Size(290, 48);
+            //
+            // textBox_namingPattern
+            //
+            textBox_namingPattern.Dock = DockStyle.Fill;
+            textBox_namingPattern.Name = "textBox_namingPattern";
+            textBox_namingPattern.Text = "[video creator]-[upload date]-[video title]-[video ID]-[video segment]";
+            toolTip1.SetToolTip(textBox_namingPattern, "Tags: [free text], [upload date], [video creator], [video ID], [video title], [video segment], [video resolution], [full video duration], [video segment duration], [download date]");
+            //
+            // groupBox_freeText
+            //
+            groupBox_freeText.Controls.Add(textBox_freeText);
+            groupBox_freeText.Name = "groupBox_freeText";
+            groupBox_freeText.TabStop = false;
+            groupBox_freeText.Text = "Free Text Tag";
+            groupBox_freeText.Dock = DockStyle.Top;
+            groupBox_freeText.Size = new System.Drawing.Size(290, 48);
+            //
+            // textBox_freeText
+            //
+            textBox_freeText.Dock = DockStyle.Fill;
+            textBox_freeText.Name = "textBox_freeText";
+            toolTip1.SetToolTip(textBox_freeText, "Value for the [free text] tag in the naming pattern");
+            //
             // groupBox1
-            // 
+            //
             resources.ApplyResources(groupBox1, "groupBox1");
             groupBox1.Controls.Add(tableLayoutPanel4);
             groupBox1.Name = "groupBox1";
@@ -450,5 +488,9 @@
         private Label label4;
         private Label hiddenlabel1;
         private Label hiddenlabel2;
+        private GroupBox groupBox_naming;
+        private TextBox textBox_namingPattern;
+        private GroupBox groupBox_freeText;
+        private TextBox textBox_freeText;
     }
 }
