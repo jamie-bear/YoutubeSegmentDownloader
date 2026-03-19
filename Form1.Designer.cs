@@ -336,12 +336,13 @@
             //
             // groupBox_naming
             //
+            groupBox_naming.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             groupBox_naming.Controls.Add(textBox_namingPattern);
+            groupBox_naming.Location = new System.Drawing.Point(12, 88);
             groupBox_naming.Name = "groupBox_naming";
+            groupBox_naming.Size = new System.Drawing.Size(776, 48);
             groupBox_naming.TabStop = false;
             groupBox_naming.Text = "File Naming Pattern";
-            groupBox_naming.Dock = DockStyle.Top;
-            groupBox_naming.Size = new System.Drawing.Size(290, 48);
             //
             // textBox_namingPattern
             //
@@ -352,12 +353,13 @@
             //
             // groupBox_freeText
             //
+            groupBox_freeText.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             groupBox_freeText.Controls.Add(textBox_freeText);
+            groupBox_freeText.Location = new System.Drawing.Point(12, 136);
             groupBox_freeText.Name = "groupBox_freeText";
+            groupBox_freeText.Size = new System.Drawing.Size(776, 48);
             groupBox_freeText.TabStop = false;
             groupBox_freeText.Text = "Free Text Tag";
-            groupBox_freeText.Dock = DockStyle.Top;
-            groupBox_freeText.Size = new System.Drawing.Size(290, 48);
             //
             // textBox_freeText
             //
