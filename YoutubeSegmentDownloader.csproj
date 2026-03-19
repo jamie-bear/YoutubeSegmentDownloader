@@ -8,7 +8,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationIcon>YoutubeSegmentDownloader.ico</ApplicationIcon>
     <PackageIcon>256.png</PackageIcon>
-    <NoWin32Manifest>true</NoWin32Manifest>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageProjectUrl>https://github.com/jim60105/YoutubeSegmentDownloader</PackageProjectUrl>
     <Copyright>GPL-3.0 License</Copyright>
