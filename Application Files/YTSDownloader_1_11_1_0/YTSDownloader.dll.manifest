@@ -75,7 +75,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>0NAoQNbxk7A+jsFx0P+l41LcvqxG1vgkZc9+yaCda6E=</dsig:DigestValue>
+      <dsig:DigestValue>TKFuev5G6ti7qbR7IKIHYc/QMTEueAJj1HdSShc2I6o=</dsig:DigestValue>
     </hash>
   </file>
   <file name="YTSDownloader.ico" size="270622">
