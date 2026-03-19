@@ -25,6 +25,22 @@ public partial class Form1 : Form
         {
             _cancellationTokenSource.Cancel();
 
+            // Save current configuration before closing
+            Settings.Default.Directory = textBox_outputDirectory.Text;
+            Settings.Default.Format = textBox_format.Text;
+            Settings.Default.NamingPattern = textBox_namingPattern.Text;
+            Settings.Default.FreeText = textBox_freeText.Text;
+
+            string browser = comboBox_browser.Text;
+            if (string.IsNullOrEmpty(browser)
+                || browser == _resources.GetString("comboBox_browser.Items"))
+            {
+                browser = "";
+            }
+            Settings.Default.Browser = browser;
+
+            Settings.Default.Save();
+
             // Wait 1 second for the download process to terminate and files clean up
             Thread.Sleep(1000);
         };
@@ -101,6 +117,7 @@ public partial class Form1 : Form
         string savedPattern = Settings.Default.NamingPattern;
         if (!string.IsNullOrWhiteSpace(savedPattern))
             textBox_namingPattern.Text = savedPattern;
+        textBox_freeText.Text = Settings.Default.FreeText;
         checkBox_logVerbose_CheckedChanged(new object(), EventArgs.Empty);
         _ = PrepareYtdlpAndFFmpegAsync().ConfigureAwait(true); // Use same thread
         Application.CurrentInputLanguage = InputLanguage.FromCulture(new CultureInfo("en-us")) ?? InputLanguage.DefaultInputLanguage;
@@ -206,6 +223,7 @@ public partial class Form1 : Form
         Settings.Default.NamingPattern = namingPattern;
 
         string freeText = textBox_freeText.Text;
+        Settings.Default.FreeText = freeText;
 
         Settings.Default.Save();
 
