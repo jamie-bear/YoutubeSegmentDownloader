@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 #nullable disable
 
-namespace YoutubeSegmentDownloader.Models;
+namespace YTSDownloader.Models;
 
 public class YtdlpVideoData
 {

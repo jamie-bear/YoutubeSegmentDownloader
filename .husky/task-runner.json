@@ -5,7 +5,7 @@
             "group": "pre-commit",
             "pathMode": "relative",
             "command": "dotnet",
-            "args": ["format", "YoutubeSegmentDownloader.sln", "--include", "${staged}"],
+            "args": ["format", "YTSDownloader.sln", "--include", "${staged}"],
             "include": ["**/*.cs", "**/*.vb"]
         }
     ]

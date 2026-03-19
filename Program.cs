@@ -4,7 +4,7 @@ using Serilog.Core;
 using Serilog.Formatting.Display;
 using Serilog.Sinks.WinForms.Base;
 
-namespace YoutubeSegmentDownloader;
+namespace YTSDownloader;
 
 internal static class Program
 {
@@ -50,7 +50,7 @@ internal static class Program
         {
             try
             {
-                string iconSourcePath = Path.Combine(Application.StartupPath, @"YoutubeSegmentDownloader.ico");
+                string iconSourcePath = Path.Combine(Application.StartupPath, @"YTSDownloader.ico");
 
                 if (!File.Exists(iconSourcePath)) return;
 
@@ -62,7 +62,7 @@ internal static class Program
                 {
                     RegistryKey? myKey = uninstallKey.OpenSubKey(subKeyName, true);
                     object? myValue = myKey.GetValue("DisplayName");
-                    if (myValue == null || myValue.ToString() != "Youtube Segment Downloader") continue;
+                    if (myValue == null || myValue.ToString() != "YTS Downloader") continue;
 
                     myKey.SetValue("DisplayIcon", iconSourcePath);
                     break;

@@ -4,10 +4,10 @@ using Serilog;
 using Xabe.FFmpeg;
 using YoutubeDLSharp;
 using YoutubeDLSharp.Options;
-using YoutubeSegmentDownloader.Extension;
-using YtdlpVideoData = YoutubeSegmentDownloader.Models.YtdlpVideoData.ytdlpVideoData;
+using YTSDownloader.Extension;
+using YtdlpVideoData = YTSDownloader.Models.YtdlpVideoData.ytdlpVideoData;
 
-namespace YoutubeSegmentDownloader;
+namespace YTSDownloader;
 
 internal partial class Download(string id,
                                 float start,

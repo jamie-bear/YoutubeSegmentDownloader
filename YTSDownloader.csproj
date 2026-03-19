@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
@@ -6,24 +6,23 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <ApplicationIcon>YoutubeSegmentDownloader.ico</ApplicationIcon>
+    <ApplicationIcon>YTSDownloader.ico</ApplicationIcon>
     <PackageIcon>256.png</PackageIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageProjectUrl>https://github.com/jim60105/YoutubeSegmentDownloader</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/jamie-bear/YoutubeSegmentDownloader</PackageProjectUrl>
     <Copyright>GPL-3.0 License</Copyright>
-    <Product>Youtube Segment Downloader</Product>
-    <Company>Youtube Segment Downloader</Company>
-    <Authors>jim60105</Authors>
-    <RepositoryUrl>https://github.com/jim60105/YoutubeSegmentDownloader.git</RepositoryUrl>
-    <PackageLicenseFile>E:\repos\YoutubeSegmentDownload\LICENSE</PackageLicenseFile>
+    <Product>YTS Downloader</Product>
+    <Company>YTS Downloader</Company>
+    <Authors>jamie-bear</Authors>
+    <RepositoryUrl>https://github.com/jamie-bear/YoutubeSegmentDownloader.git</RepositoryUrl>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-    <StartupObject>YoutubeSegmentDownloader.Program</StartupObject>
+    <StartupObject>YTSDownloader.Program</StartupObject>
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <Content Include=".husky\task-runner.json" />
-    <Content Include="YoutubeSegmentDownloader.ico">
+    <Content Include="YTSDownloader.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

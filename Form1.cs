@@ -4,10 +4,10 @@ using System.Globalization;
 using System.Text.RegularExpressions;
 using Serilog;
 using Serilog.Events;
-using YoutubeSegmentDownloader.Properties;
-using static YoutubeSegmentDownloader.ExternalProgram;
+using YTSDownloader.Properties;
+using static YTSDownloader.ExternalProgram;
 
-namespace YoutubeSegmentDownloader;
+namespace YTSDownloader;
 
 public partial class Form1 : Form
 {
@@ -19,6 +19,7 @@ public partial class Form1 : Form
     public Form1()
     {
         InitializeComponent();
+        ApplyDarkTheme();
         Shown += Form1_Shown;
         Closing += (_, _) =>
         {
@@ -27,6 +28,67 @@ public partial class Form1 : Form
             // Wait 1 second for the download process to terminate and files clean up
             Thread.Sleep(1000);
         };
+    }
+
+    private void ApplyDarkTheme()
+    {
+        // Form
+        Theme.ApplyTo(this);
+
+        // Panels
+        Theme.StylePanel(panel_main);
+        Theme.StylePanel(panel_download, isSurface: true);
+        Theme.StylePanel(panel1, isSurface: true);
+
+        // Table layout panels - transparent background
+        foreach (var tlp in new[] { tableLayoutPanel_main, tableLayoutPanel1, tableLayoutPanel2,
+                                     tableLayoutPanel3, tableLayoutPanel4, tableLayoutPanel5,
+                                     tableLayoutPanel_segment })
+        {
+            tlp.BackColor = Color.Transparent;
+        }
+
+        // Text boxes
+        foreach (var tb in new[] { textBox_youtube, textBox_outputDirectory, textBox_start,
+                                    textBox_end, textBox_format, textBox_namingPattern,
+                                    textBox_freeText })
+        {
+            Theme.StyleTextBox(tb);
+        }
+
+        // Buttons
+        Theme.StyleButton(button_start, isPrimary: true);
+        Theme.StyleButton(button_folder);
+        Theme.StyleButton(button_redownloadDependencies);
+
+        // Group boxes
+        foreach (var gb in new[] { groupBox1, groupBox2, groupBox3, groupBox_naming, groupBox_freeText })
+        {
+            Theme.StyleGroupBox(gb);
+        }
+
+        // Combo box
+        Theme.StyleComboBox(comboBox_browser);
+
+        // Check boxes
+        Theme.StyleCheckBox(checkBox_segment);
+        Theme.StyleCheckBox(checkBox_logVerbose);
+
+        // Labels
+        foreach (var lbl in new[] { label1, label2, label3, label4, label5, label6, label8,
+                                     label_checking_ytdlp, label_checking_ffmpeg })
+        {
+            Theme.StyleLabel(lbl);
+        }
+
+        // Rich text boxes
+        Theme.StyleRichTextBox(richTextBox1);
+        Theme.StyleRichTextBox(richTextBox2);
+
+        // Log control
+        richTextBoxLogControl1.BackColor = Color.FromArgb(17, 17, 27);
+        richTextBoxLogControl1.ForeColor = Theme.TextSecondary;
+        richTextBoxLogControl1.Font = Theme.FontMono;
     }
 
     private void Form1_Shown(object? sender, EventArgs e)

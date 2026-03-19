@@ -1,7 +1,7 @@
 using System.Globalization;
 using Serilog;
 
-namespace YoutubeSegmentDownloader;
+namespace YTSDownloader;
 
 internal static class FileNameTemplate
 {

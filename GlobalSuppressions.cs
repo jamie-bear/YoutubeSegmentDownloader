@@ -5,4 +5,4 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Maintainability", "CA1507:使用 nameof 表示符號名稱", Justification = "<暫止>", Scope = "member", Target = "~P:YoutubeSegmentDownloader.Models.YtdlpVideoData.HttpHeaders.Accept")]
+[assembly: SuppressMessage("Maintainability", "CA1507:使用 nameof 表示符號名稱", Justification = "<暫止>", Scope = "member", Target = "~P:YTSDownloader.Models.YtdlpVideoData.HttpHeaders.Accept")]
