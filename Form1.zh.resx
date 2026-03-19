@@ -481,7 +481,7 @@
     <value>202, 41</value>
   </data>
   <data name="textBox_youtube.PlaceholderText" xml:space="preserve">
-    <value>( 在此貼上任何Youtube連結 )</value>
+    <value>( 在此貼上影片網址或 ID )</value>
   </data>
   <data name="textBox_youtube.Size" type="System.Drawing.Size, System.Drawing">
     <value>571, 32</value>
@@ -490,7 +490,7 @@
     <value>1</value>
   </data>
   <data name="textBox_youtube.ToolTip" xml:space="preserve">
-    <value>也接受Youtube剪輯片段喔!</value>
+    <value>接受影片網址、ID 和剪輯連結</value>
   </data>
   <data name="&gt;&gt;textBox_youtube.Name" xml:space="preserve">
     <value>textBox_youtube</value>
@@ -990,7 +990,7 @@ https://github.com/yt-dlp/yt-dlp/releases/latest</value>
     <value>0</value>
   </data>
   <data name="comboBox_browser.ToolTip" xml:space="preserve">
-    <value>選擇你已登入Youtube帳號的瀏覧器</value>
+    <value>選擇要導入身份驗證 Cookie 的瀏覽器</value>
   </data>
   <data name="&gt;&gt;comboBox_browser.Name" xml:space="preserve">
     <value>comboBox_browser</value>
@@ -1017,7 +1017,7 @@ https://github.com/yt-dlp/yt-dlp/releases/latest</value>
     <value>使用瀏覧器的登入授權</value>
   </data>
   <data name="groupBox2.ToolTip" xml:space="preserve">
-    <value>由你選擇的瀏覧器導出Youtube登入授權，並用來下載影片</value>
+    <value>從選擇的瀏覽器導入身份驗證 Cookie，以存取需要登入的內容</value>
   </data>
   <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
     <value>groupBox2</value>
@@ -1407,7 +1407,7 @@ https://github.com/yt-dlp/yt-dlp/releases/latest</value>
     <value>0</value>
   </data>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>https://github.com/jamie-bear/YoutubeSegmentDownloader</value>
+    <value>https://github.com/jamie-bear/YTS-Downloader</value>
   </data>
   <data name="richTextBox1.ToolTip" xml:space="preserve">
     <value>你可以在這裡找到關於此軟體的一切！</value>
@@ -6003,8 +6003,8 @@ https://github.com/yt-dlp/yt-dlp/releases/latest</value>
     <value>System.Windows.Forms.Form, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="hiddenlabel1.Text" xml:space="preserve">
-    <value>你輸入的影片來源並非Youtube連結或是影片ID。
-程式會將此來源直接交給yt-dlp，這很可能會失敗！</value>
+    <value>輸入的內容不是已識別的影片網址或 ID。
+程式將直接傳遞給 yt-dlp，可能無法成功。</value>
   </data>
   <data name="hiddenlabel2.Text" xml:space="preserve">
     <value>停止</value>

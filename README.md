@@ -2,30 +2,41 @@
 
 > Forked from [jim60105/YoutubeSegmentDownloader](https://github.com/jim60105/YoutubeSegmentDownloader) (archived August 2024). See [Changes from upstream](#changes-from-upstream) below.
 
-A lightweight tool for downloading video segments from YouTube and other sites supported by yt-dlp, with precise frame-accurate cutting via FFmpeg.
+A free, open-source media segment downloader and processing utility. Extract precise time-range segments from video content you are authorized to access -- including your own uploads, licensed media, public-domain works, and Creative Commons content -- with frame-accurate cutting powered by FFmpeg.
 
 ![Windows](https://img.shields.io/static/v1?style=for-the-badge&message=Windows&color=0078D6&logo=Windows&logoColor=FFFFFF&label=)
 ![.NET 8.0](https://img.shields.io/static/v1?style=for-the-badge&message=.NET+8.0&color=512BD4&logo=.NET&logoColor=FFFFFF&label=)
-![GitHub](https://img.shields.io/github/license/jamie-bear/YoutubeSegmentDownloader?style=for-the-badge)
+![GitHub](https://img.shields.io/github/license/jamie-bear/YTS-Downloader?style=for-the-badge)
 
 > Windows x64 only. Requires .NET 8.0 Runtime.
 
+## Acceptable Use
+
+This software is intended for lawful use only. Users are responsible for complying with applicable copyright law, license terms, and platform terms of service. This project does not endorse or encourage copyright infringement.
+
+Intended use cases include:
+
+- Downloading and trimming **your own uploads** or content you created
+- Processing media you have **explicit permission** to use
+- Working with **public-domain**, **Creative Commons**, or other openly licensed content
+- Offline access for **research, accessibility, archival, or QA** where you hold the necessary rights
+- Segment extraction and trimming for **authorized editing workflows**
+
 ## Features
 
-- **Segment downloads** - Download only a specific time range instead of the whole video
-- **Automatic dependencies** - yt-dlp and FFmpeg are downloaded automatically at startup
-- **YouTube clip support** - Paste a YouTube clip URL and it auto-fills the segment times
-- **Browser cookie import** - Use your browser's login session for membership/private videos
-- **Metadata embedding** - YouTube metadata (title, creator, date, tags) embedded into MP4
-- **Customizable file naming** - Tag-based naming patterns with tokens like `[video creator]`, `[upload date]`, `[video title]`, etc.
-- **Format selection** - Specify yt-dlp format codes (e.g. `303+251`)
-- **Multi-site support** - Works with any yt-dlp supported site (tested: YouTube, Twitch, niconico)
+- **Precise segment extraction** - Specify a start and end time to extract only the portion you need, with frame-accurate re-encoding
+- **Automatic dependency management** - yt-dlp and FFmpeg are downloaded and updated automatically at startup
+- **Metadata embedding** - Source metadata (title, creator, date, tags, source URL) is embedded into output MP4 files
+- **Customizable file naming** - Tag-based output filename patterns using tokens like `[video creator]`, `[upload date]`, `[video title]`, `[video segment]`, etc.
+- **Format selection** - Specify yt-dlp format codes for fine-grained control over source quality
+- **Browser session import** - Authenticate with your browser session for accessing content that requires login
+- **Multi-site support** - Compatible with any [yt-dlp supported site](https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md)
 - **Dark theme UI** - Modern, minimalist dark interface
 - **I18n** - English and Chinese interfaces
 
 ## Install
 
-Download the latest release from [Releases](https://github.com/jamie-bear/YoutubeSegmentDownloader/releases/latest).
+Download the latest release from [Releases](https://github.com/jamie-bear/YTS-Downloader/releases/latest).
 
 **Option A: Setup installer** (`setup.exe`)
 - Installs .NET 8.0 Runtime automatically
@@ -37,32 +48,32 @@ Download the latest release from [Releases](https://github.com/jamie-bear/Youtub
 
 ### Prerequisites
 
-- [Deno](https://deno.com/) must be installed (required by yt-dlp for YouTube downloads)
+- [Deno](https://deno.com/) runtime must be installed (required by yt-dlp for certain sites)
 
-## Why not just use `yt-dlp --download-sections`?
+## How it works
 
-When yt-dlp downloads a segment, it uses FFmpeg stream copy which seeks to the nearest keyframe *before* your start time. This results in inaccurate cuts with corrupted frames at the beginning.
-
-YTS Downloader solves this by re-encoding the downloaded segment with FFmpeg for frame-accurate cutting:
+When extracting a segment via stream copy, FFmpeg seeks to the nearest keyframe *before* the requested start time, resulting in imprecise cuts with corrupted leading frames. YTS Downloader solves this with a two-pass approach:
 
 ```
-yt-dlp → download segment (stream copy, imprecise)
+yt-dlp → download segment (stream copy)
   ↓
-ffmpeg -sseof → re-encode from end offset (precise cut)
+ffmpeg -sseof → re-encode from end offset (frame-accurate)
   ↓
-Clean MP4 with accurate start/end times
+Clean MP4 output with precise start/end times
 ```
+
+Output is encoded to H.264/AAC MP4 with configurable quality settings.
 
 ## Changes from upstream
 
 This fork includes the following changes from the original [jim60105/YoutubeSegmentDownloader](https://github.com/jim60105/YoutubeSegmentDownloader):
 
-1. **Tag-based file naming** - Customizable output filename patterns using tags like `[video creator]`, `[upload date]`, `[video title]`, `[video segment]`, `[video resolution]`, `[download date]`, and more
-2. **YouTube metadata embedding** - Video metadata (title, artist, creation date, tags, source URL) automatically embedded into downloaded MP4 files
-3. **Fixed naming/settings overlap** - Resolved issue where naming settings overlapped with output directory and video ID fields
-4. **CI/CD improvements** - Auto-release on push to master, pull request build triggers
+1. **Tag-based file naming** - Customizable output filename patterns using configurable tag tokens
+2. **Metadata embedding** - Source metadata automatically embedded into downloaded MP4 files
+3. **Fixed naming/settings overlap** - Resolved UI issue where naming settings overlapped with other input fields
+4. **CI/CD improvements** - Automated releases, pull request build triggers
 5. **App renamed to YTS Downloader** - Differentiated from the archived upstream repository
-6. **Modern dark theme UI** - Redesigned interface with a dark color scheme for a cleaner, more modern look
+6. **Modern dark theme UI** - Redesigned interface with a dark color scheme
 
 ## LICENSE
 

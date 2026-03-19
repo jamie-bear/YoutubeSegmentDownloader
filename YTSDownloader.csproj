@@ -10,12 +10,12 @@
     <PackageIcon>256.png</PackageIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageProjectUrl>https://github.com/jamie-bear/YoutubeSegmentDownloader</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/jamie-bear/YTS-Downloader</PackageProjectUrl>
     <Copyright>GPL-3.0 License</Copyright>
     <Product>YTS Downloader</Product>
     <Company>YTS Downloader</Company>
     <Authors>jamie-bear</Authors>
-    <RepositoryUrl>https://github.com/jamie-bear/YoutubeSegmentDownloader.git</RepositoryUrl>
+    <RepositoryUrl>https://github.com/jamie-bear/YTS-Downloader.git</RepositoryUrl>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <StartupObject>YTSDownloader.Program</StartupObject>
     <PlatformTarget>x64</PlatformTarget>
