@@ -64,12 +64,12 @@ internal partial class Download(string id,
 
             if (end == 0)
             {
-                Log.Information("Move file to {filePath}", OutputFilePath);
-                File.Move(tempFilePath1, OutputFilePath, true);
+                _ = await EmbedMetadataAsync(tempFilePath1, tempFilePath2, videoData, cancellationToken);
+                File.Move(tempFilePath2, OutputFilePath, true);
             }
             else
             {
-                _ = await CutWithFFmpegAsync(tempFilePath1, tempFilePath2, cancellationToken);
+                _ = await CutWithFFmpegAsync(tempFilePath1, tempFilePath2, videoData, cancellationToken);
                 File.Move(tempFilePath2, OutputFilePath, true);
             }
 
@@ -236,7 +236,7 @@ internal partial class Download(string id,
     /// <param name="outputPath"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    private async Task<IConversionResult> CutWithFFmpegAsync(string inputPath, string outputPath, CancellationToken? cancellationToken = default)
+    private async Task<IConversionResult> CutWithFFmpegAsync(string inputPath, string outputPath, YtdlpVideoData videoData, CancellationToken? cancellationToken = default)
     {
         Log.Information("Start cutting video with FFmpeg...");
 
@@ -250,6 +250,7 @@ internal partial class Download(string id,
                                         .AddParameter($"-sseof -{duration}", ParameterPosition.PreInput)
                                         .AddStream(mediaInfo.Streams)
                                         .AddParameter("-c:v libx264 -preset slow -crf 18 -c:a aac -b:a 192k -pix_fmt yuv420p")
+                                        .AddParameter(BuildMetadataParameters(videoData))
                                         .AddParameter("-movflags +faststart")
                                         .SetOutput(outputPath)
                                         .SetOverwriteOutput(true);
@@ -261,6 +262,102 @@ internal partial class Download(string id,
 
         Log.Debug("FFmpeg arguments: {arguments}", conversion.Build());
         return await conversion.Start(cancellationToken ?? CancellationToken.None);
+    }
+
+    /// <summary>
+    ///     Embed metadata without re-encoding (for full video downloads)
+    /// </summary>
+    private async Task<IConversionResult> EmbedMetadataAsync(string inputPath, string outputPath, YtdlpVideoData videoData, CancellationToken? cancellationToken = default)
+    {
+        Log.Information("Embedding metadata with FFmpeg...");
+
+        FFmpeg.SetExecutablesPath(ExternalProgram.FFmpegPath);
+        IMediaInfo? mediaInfo = await FFmpeg.GetMediaInfo(inputPath);
+
+        IConversion? conversion = FFmpeg.Conversions.New()
+                                        .AddStream(mediaInfo.Streams)
+                                        .AddParameter("-c copy")
+                                        .AddParameter(BuildMetadataParameters(videoData))
+                                        .AddParameter("-movflags +faststart")
+                                        .SetOutput(outputPath)
+                                        .SetOverwriteOutput(true);
+
+        conversion.OnDataReceived += (_, e) =>
+        {
+            if (e.Data != null) Log.Verbose(e.Data);
+        };
+
+        Log.Debug("FFmpeg arguments: {arguments}", conversion.Build());
+        return await conversion.Start(cancellationToken ?? CancellationToken.None);
+    }
+
+    /// <summary>
+    ///     Build FFmpeg metadata parameters from YouTube video data.
+    ///     Maps: video URL → purl (Author URL), channel URL → episode_id (Promotion URL),
+    ///     upload date → creation_time (Media created), title, tags, and comment.
+    /// </summary>
+    private static string BuildMetadataParameters(YtdlpVideoData videoData)
+    {
+        var parts = new List<string>();
+
+        // Title
+        if (!string.IsNullOrEmpty(videoData.Title))
+            parts.Add($"-metadata title={EscapeMetadataValue(videoData.Title)}");
+
+        // Artist (channel name)
+        string? creator = videoData.Uploader ?? videoData.Channel;
+        if (!string.IsNullOrEmpty(creator))
+            parts.Add($"-metadata artist={EscapeMetadataValue(creator)}");
+
+        // Media created (ISO 8601 format for creation_time)
+        if (!string.IsNullOrEmpty(videoData.UploadDate)
+            && DateTime.TryParseExact(videoData.UploadDate, "yyyyMMdd",
+                CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime uploadDate))
+        {
+            parts.Add($"-metadata creation_time={uploadDate:yyyy-MM-ddTHH:mm:ssZ}");
+            parts.Add($"-metadata date={uploadDate:yyyy-MM-dd}");
+        }
+
+        // Author URL → YouTube video URL
+        if (!string.IsNullOrEmpty(videoData.WebpageUrl))
+            parts.Add($"-metadata purl={EscapeMetadataValue(videoData.WebpageUrl)}");
+
+        // Comment: include video URL, channel URL, and description excerpt
+        var commentLines = new List<string>();
+        if (!string.IsNullOrEmpty(videoData.WebpageUrl))
+            commentLines.Add($"Source: {videoData.WebpageUrl}");
+        string? channelUrl = videoData.ChannelUrl ?? videoData.UploaderUrl;
+        if (!string.IsNullOrEmpty(channelUrl))
+            commentLines.Add($"Channel: {channelUrl}");
+        if (!string.IsNullOrEmpty(videoData.Description))
+        {
+            string descExcerpt = videoData.Description.Length > 200
+                ? videoData.Description[..200] + "..."
+                : videoData.Description;
+            commentLines.Add(descExcerpt);
+        }
+        if (commentLines.Count > 0)
+            parts.Add($"-metadata comment={EscapeMetadataValue(string.Join("\n", commentLines))}");
+
+        // Tags/keywords
+        if (videoData.Tags is { Count: > 0 })
+        {
+            string tagsStr = string.Join(", ", videoData.Tags);
+            parts.Add($"-metadata keywords={EscapeMetadataValue(tagsStr)}");
+        }
+
+        return string.Join(" ", parts);
+    }
+
+    /// <summary>
+    ///     Escape a metadata value for FFmpeg's -metadata parameter.
+    ///     FFmpeg metadata values with special characters need quoting.
+    /// </summary>
+    private static string EscapeMetadataValue(string value)
+    {
+        // Replace backslashes, then quotes
+        string escaped = value.Replace("\\", "\\\\").Replace("\"", "\\\"");
+        return $"\"{escaped}\"";
     }
 
     private string CalculatePath(YtdlpVideoData videoData)
