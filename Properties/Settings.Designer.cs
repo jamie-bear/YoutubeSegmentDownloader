@@ -82,5 +82,17 @@ namespace YTSDownloader.Properties {
                 this["NamingPattern"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string FreeText {
+            get {
+                return ((string)(this["FreeText"]));
+            }
+            set {
+                this["FreeText"] = value;
+            }
+        }
     }
 }
