@@ -51,22 +51,22 @@
       <dsig:DigestValue>IwGE9guuL+ryRPEKi6wFPI/zOhg7zDZbTYuHbSt/SAk=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="NOTICE" size="2183">
+  <file name="NOTICE" size="2216">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>I/w2A8KJrvG2kUrUOpikaPO+uuPqCmKFZ65mn17utu8=</dsig:DigestValue>
+      <dsig:DigestValue>w2ZWFkvDCYkI6mRgIKqwWR1605e2g/v9p4nohceUcc8=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="README.md" size="5268">
+  <file name="README.md" size="5938">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>j4YwsrVkgTkPv7RYMj2oGE5diGzyifJsDqpT2nYXbc4=</dsig:DigestValue>
+      <dsig:DigestValue>UoULS2M54vOIaH2iJwor8yfG4/ByPcBvM3RxOMt4vGU=</dsig:DigestValue>
     </hash>
   </file>
   <file name="YTSDownloader.exe" size="3623599">
@@ -75,7 +75,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>WR4NlZsgP9GBqz634wTdrsSfZm8rVsXdF/xEfFS31uk=</dsig:DigestValue>
+      <dsig:DigestValue>JcJ6Tl0e4SsclY+x0MmuJSe6qWSNrBKS+UcS+/XVdFw=</dsig:DigestValue>
     </hash>
   </file>
   <file name="YTSDownloader.ico" size="270622">
