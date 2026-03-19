@@ -12,9 +12,10 @@
           "Serilog": "3.1.1",
           "Serilog.Sinks.File": "5.0.0",
           "Serilog.Sinks.WinForms.Core": "1.0.3",
-          "SharpCompress": "0.36.0",
+          "SharpCompress": "0.38.0",
           "Xabe.FFmpeg": "5.2.6",
-          "YoutubeDLSharp": "1.1.0"
+          "YoutubeDLSharp": "1.1.0",
+          "ZstdSharp.Port": "0.8.1"
         },
         "runtime": {
           "YTSDownloader.dll": {}
@@ -67,14 +68,14 @@
           }
         }
       },
-      "SharpCompress/0.36.0": {
+      "SharpCompress/0.38.0": {
         "dependencies": {
-          "ZstdSharp.Port": "0.7.4"
+          "ZstdSharp.Port": "0.8.1"
         },
         "runtime": {
           "lib/net8.0/SharpCompress.dll": {
-            "assemblyVersion": "0.36.0.0",
-            "fileVersion": "0.36.0.0"
+            "assemblyVersion": "0.38.0.0",
+            "fileVersion": "0.38.0.0"
           }
         }
       },
@@ -100,11 +101,11 @@
           }
         }
       },
-      "ZstdSharp.Port/0.7.4": {
+      "ZstdSharp.Port/0.8.1": {
         "runtime": {
           "lib/net8.0/ZstdSharp.dll": {
-            "assemblyVersion": "0.7.4.0",
-            "fileVersion": "0.7.4.0"
+            "assemblyVersion": "0.8.1.0",
+            "fileVersion": "0.8.1.0"
           }
         }
       }
@@ -144,12 +145,12 @@
       "path": "serilog.sinks.winforms.core/1.0.3",
       "hashPath": "serilog.sinks.winforms.core.1.0.3.nupkg.sha512"
     },
-    "SharpCompress/0.36.0": {
+    "SharpCompress/0.38.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-48am//T6Ou+GmyPmBaxaFN1ym0VNidRcBeANr9+OYTzpKRz8QMGzAkHVkCV30lFQ/gnWqGr50AuebahpG1C6xA==",
-      "path": "sharpcompress/0.36.0",
-      "hashPath": "sharpcompress.0.36.0.nupkg.sha512"
+      "sha512": "sha512-8i6KqjAFI3mvya8W8rnQrf5h4vz6ilw4zqk2AzInVqqqZ25TD6fmVeYBnlisjTWwP26eltZc0buSmJ8a3YIGxg==",
+      "path": "sharpcompress/0.38.0",
+      "hashPath": "sharpcompress.0.38.0.nupkg.sha512"
     },
     "Xabe.FFmpeg/5.2.6": {
       "type": "package",
@@ -165,12 +166,12 @@
       "path": "youtubedlsharp/1.1.0",
       "hashPath": "youtubedlsharp.1.1.0.nupkg.sha512"
     },
-    "ZstdSharp.Port/0.7.4": {
+    "ZstdSharp.Port/0.8.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-ziptnotpUJr51afwXJQ5Wc03dvDiZAdmxS08s1g7SHn/VzbyZUXdH6yORk/zaNjzUOEE6pVZ0Nqztab0rYROgQ==",
-      "path": "zstdsharp.port/0.7.4",
-      "hashPath": "zstdsharp.port.0.7.4.nupkg.sha512"
+      "sha512": "sha512-19tNz33kn2EkyViFXuxfVn338UJaRmkwBphVqP2dVJIYQUQgFrgG5h061mxkRRg1Ax6r+6WOj1FxaFZ5qaWqqg==",
+      "path": "zstdsharp.port/0.8.1",
+      "hashPath": "zstdsharp.port.0.8.1.nupkg.sha512"
     }
   }
 }

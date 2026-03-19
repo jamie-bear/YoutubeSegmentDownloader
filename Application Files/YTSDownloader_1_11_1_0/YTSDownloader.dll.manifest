@@ -69,13 +69,13 @@
       <dsig:DigestValue>UoULS2M54vOIaH2iJwor8yfG4/ByPcBvM3RxOMt4vGU=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="YTSDownloader.exe" size="3623599">
+  <file name="YTSDownloader.exe" size="3651797">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>JcJ6Tl0e4SsclY+x0MmuJSe6qWSNrBKS+UcS+/XVdFw=</dsig:DigestValue>
+      <dsig:DigestValue>4QuhtFROXcunjhBIWzx1mw8WJPVzPgOV4BcTK97Bvp4=</dsig:DigestValue>
     </hash>
   </file>
   <file name="YTSDownloader.ico" size="270622">
