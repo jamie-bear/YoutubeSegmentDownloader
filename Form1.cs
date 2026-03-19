@@ -20,6 +20,7 @@ public partial class Form1 : Form
     {
         InitializeComponent();
         ApplyDarkTheme();
+        ApplyResponsiveLayout();
         Shown += Form1_Shown;
         Closing += (_, _) =>
         {
@@ -107,6 +108,40 @@ public partial class Form1 : Form
         richTextBoxLogControl1.Font = Theme.FontMono;
     }
 
+    private void ApplyResponsiveLayout()
+    {
+        // Ensure the form has a sensible minimum size and is resizable
+        MinimumSize = new Size(700, 520);
+        FormBorderStyle = FormBorderStyle.Sizable;
+
+        // Dependency-download overlay fills the whole form
+        panel_download.Dock = DockStyle.Fill;
+
+        const int margin = 12;
+
+        // All main content controls are already anchored Top|Left|Right (or Top|Bottom|Left|Right
+        // for the log) in the resx. Just normalize left margins to be consistent.
+        tableLayoutPanel_main.Left = margin;
+        groupBox_naming.Left = margin;
+        groupBox_freeText.Left = margin;
+        tableLayoutPanel2.Left = margin;
+        richTextBoxLogControl1.Left = margin;
+
+        // Add a subtle 1px divider line above the log area to visually separate it
+        var divider = new Panel
+        {
+            Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right,
+            Left = margin,
+            Top = richTextBoxLogControl1.Top - 3,
+            Width = panel_main.Width - margin * 2,
+            Height = 1,
+            BackColor = Theme.SurfaceBorder
+        };
+        panel_main.Controls.Add(divider);
+        divider.BringToFront();
+        richTextBoxLogControl1.BringToFront();
+    }
+
     private void Form1_Shown(object? sender, EventArgs e)
     {
         textBox_outputDirectory.Text = Settings.Default.Directory;
@@ -135,7 +170,7 @@ public partial class Form1 : Form
                 && YtdlpStatus == DependencyStatus.Exist)
             {
                 Log.Information("Finish downloading all dependencies.");
-                if (forceUpdate) MessageBox.Show("Finish downloading all dependencies.", "Finish");
+                if (forceUpdate) Log.Information("✔ All dependencies updated successfully.");
                 break;
             }
 
@@ -143,7 +178,7 @@ public partial class Form1 : Form
                 || YtdlpStatus == DependencyStatus.Failed)
             {
                 Log.Fatal("!!!! Failed to download dependencies !!!!");
-                MessageBox.Show("Failed to download dependencies. Please check the log for detailed exceptions.", "Error!");
+                Log.Fatal("Please check the log for detailed exceptions.");
                 break;
             }
 
@@ -250,8 +285,7 @@ public partial class Form1 : Form
             return id;
         }
 
-        Log.Error(_resources.GetString("hiddenlabel1.Text", new CultureInfo("en-us"))!);
-        MessageBox.Show(_resources.GetString("hiddenlabel1.Text"), "Warning!");
+        Log.Warning(_resources.GetString("hiddenlabel1.Text", new CultureInfo("en-us"))!);
 
         return text;
     }
@@ -275,8 +309,7 @@ public partial class Form1 : Form
             return true;
         }
 
-        Log.Error("Segment time invalid!");
-        MessageBox.Show("Segment time invalid!", "Error!");
+        Log.Error("Segment time invalid! Start must be ≥ 0, end must be > 0, and start < end.");
         return false;
     }
 
@@ -298,8 +331,7 @@ public partial class Form1 : Form
         catch (Exception)
         {
             directory = null;
-            Log.Error("Output Directory invalid!");
-            MessageBox.Show("Output Directory invalid!", "Error!");
+            Log.Error("Output Directory invalid! Please enter a valid directory path.");
             return false;
         }
     }
@@ -349,7 +381,8 @@ public partial class Form1 : Form
                 throw new InvalidOperationException("The download process completed without success.");
             }
 
-            MessageBox.Show($"Video segments are stored in:\n\n{download.OutputFilePath}", "Finish");
+            Log.Information("✔ Download complete! File saved to:");
+            Log.Information(download.OutputFilePath);
 
             // Open save directory
             Process process = new();
@@ -363,8 +396,7 @@ public partial class Form1 : Form
                 return;
 
             Log.Logger.Error(e.Message);
-            MessageBox.Show("Download not successful!", "Failed!!!");
-            Log.Logger.Error("!!!! FAILED !!!!");
+            Log.Logger.Error("!!!! DOWNLOAD FAILED !!!!");
             Log.Logger.Error("Please check the \"Log Verbose\" checkbox for more details and try again.");
             Log.Logger.Error("If you're sure you've found a bug, please report it back to me along with the ENTIRE VERBOSE log.");
         }
@@ -421,7 +453,7 @@ public partial class Form1 : Form
         // skipcq: CS-R1008
         catch (Exception)
         {
-            MessageBox.Show("Unable to open link that was clicked.", "Error!");
+            Log.Warning("Unable to open link that was clicked.");
         }
     }
 
