@@ -14,7 +14,9 @@ internal partial class Download(string id,
                                 float end,
                                 DirectoryInfo outputDirectory,
                                 string format,
-                                string browser)
+                                string browser,
+                                string namingTemplate,
+                                string freeText)
 {
     public bool Finished;
     public string? OutputFilePath;
@@ -55,11 +57,7 @@ internal partial class Download(string id,
             YtdlpVideoData? videoData = await FetchVideoInfoAsync(ytdl, optionSet, cancellationToken);
             if (null == videoData) return;
 
-            OutputFilePath = CalculatePath(videoData.Title,
-                                           DateTime.ParseExact(videoData.UploadDate ?? "19700101",
-                                                               "yyyyMMdd",
-                                                               CultureInfo.InvariantCulture),
-                                           videoData.Id);
+            OutputFilePath = CalculatePath(videoData);
 
             bool downloadSuccess = await DownloadVideoAsync(ytdl, optionSet, cancellationToken);
             if (!downloadSuccess) return;
@@ -265,33 +263,31 @@ internal partial class Download(string id,
         return await conversion.Start(cancellationToken ?? CancellationToken.None);
     }
 
-    /// <summary>
-    ///     路徑做檢查和轉換
-    /// </summary>
-    /// <param name="title">影片標題，用做檔名</param>
-    /// <param name="date">影片日期，用做檔名</param>
-    /// <param name="videoId"></param>
-    /// <returns></returns>
-    private string CalculatePath(string? title, DateTime? date, string? videoId)
+    private string CalculatePath(YtdlpVideoData videoData)
     {
-        title ??= "";
-        // 取代掉檔名中的非法字元
-        title = string.Join(string.Empty, title.Split(Path.GetInvalidFileNameChars()))
-                      .Replace(".", string.Empty);
+        DateTime? uploadDate = DateTime.TryParseExact(videoData.UploadDate ?? "19700101",
+                                                       "yyyyMMdd",
+                                                       CultureInfo.InvariantCulture,
+                                                       DateTimeStyles.None,
+                                                       out DateTime parsed)
+                                   ? parsed
+                                   : DateTime.Now;
 
-        // 截短
-        if (title.Length > 80)
-        {
-            Log.Warning("The title is too long! Limit it to 80 characters.");
-            title = title[..80];
-        }
+        string? resolution = videoData.Height != null ? $"{videoData.Height}p" : videoData.Resolution;
 
-        // skipcq: CS-W1091
-        date ??= DateTime.Now;
+        string fileName = FileNameTemplate.BuildFileName(
+            template: namingTemplate,
+            title: videoData.Title,
+            uploadDate: uploadDate,
+            videoId: videoData.Id ?? id,
+            uploader: videoData.Uploader ?? videoData.Channel,
+            start: start,
+            end: end,
+            resolution: resolution,
+            fullDurationSeconds: videoData.Duration,
+            freeText: freeText);
 
-        string newPath = Path.Combine(outputDirectory.FullName,
-                                      $"{date:yyyyMMdd} {title} ({videoId ?? id}) [{start}_{end}].mp4");
-
+        string newPath = Path.Combine(outputDirectory.FullName, fileName);
         Log.Debug("Calculate output file path as {newPath}", newPath);
         return newPath;
     }
