@@ -1407,7 +1407,7 @@ https://github.com/yt-dlp/yt-dlp/releases/latest</value>
     <value>0</value>
   </data>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>https://github.com/jim60105/YoutubeSegmentDownloader</value>
+    <value>https://github.com/jamie-bear/YoutubeSegmentDownloader</value>
   </data>
   <data name="richTextBox1.ToolTip" xml:space="preserve">
     <value>你可以在這裡找到關於此軟體的一切！</value>
@@ -5982,7 +5982,7 @@ https://github.com/yt-dlp/yt-dlp/releases/latest</value>
 </value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Youtube片段下載器 (Youtube Segment Downloader)</value>
+    <value>YTS 下載器 (YTS Downloader)</value>
   </data>
   <data name="&gt;&gt;folderBrowserDialog1.Name" xml:space="preserve">
     <value>folderBrowserDialog1</value>

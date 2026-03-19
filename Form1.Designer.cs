@@ -1,4 +1,4 @@
-﻿namespace YoutubeSegmentDownloader
+﻿namespace YTSDownloader
 {
     partial class Form1
     {
@@ -227,7 +227,7 @@
             // panel_download
             // 
             resources.ApplyResources(panel_download, "panel_download");
-            panel_download.BackColor = SystemColors.Control;
+            panel_download.BackColor = Theme.Surface;
             panel_download.Controls.Add(richTextBox2);
             panel_download.Controls.Add(panel1);
             panel_download.Name = "panel_download";
@@ -235,7 +235,7 @@
             // richTextBox2
             // 
             resources.ApplyResources(richTextBox2, "richTextBox2");
-            richTextBox2.BackColor = SystemColors.Control;
+            richTextBox2.BackColor = Theme.Surface;
             richTextBox2.BorderStyle = BorderStyle.None;
             richTextBox2.Name = "richTextBox2";
             richTextBox2.ReadOnly = true;
@@ -405,7 +405,7 @@
             // richTextBox1
             // 
             resources.ApplyResources(richTextBox1, "richTextBox1");
-            richTextBox1.BackColor = SystemColors.Control;
+            richTextBox1.BackColor = Theme.Surface;
             richTextBox1.BorderStyle = BorderStyle.None;
             richTextBox1.Name = "richTextBox1";
             richTextBox1.ReadOnly = true;

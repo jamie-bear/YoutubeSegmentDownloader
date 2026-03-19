@@ -3,9 +3,9 @@ using System.Text.RegularExpressions;
 using YoutubeDLSharp;
 using YoutubeDLSharp.Helpers;
 using YoutubeDLSharp.Options;
-using YtdlpVideoData = YoutubeSegmentDownloader.Models.YtdlpVideoData.ytdlpVideoData;
+using YtdlpVideoData = YTSDownloader.Models.YtdlpVideoData.ytdlpVideoData;
 
-namespace YoutubeSegmentDownloader.Extension;
+namespace YTSDownloader.Extension;
 
 internal static partial class YoutubeDLExtension
 {

@@ -1415,7 +1415,7 @@ The program will hand this source directly to yt-dlp, which will most likely fai
     <value>0</value>
   </data>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>https://github.com/jim60105/YoutubeSegmentDownloader</value>
+    <value>https://github.com/jamie-bear/YoutubeSegmentDownloader</value>
   </data>
   <data name="richTextBox1.ToolTip" xml:space="preserve">
     <value>In this link you can find everything about this software.</value>
@@ -5990,7 +5990,7 @@ The program will hand this source directly to yt-dlp, which will most likely fai
 </value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Youtube Segment Downloader</value>
+    <value>YTS Downloader</value>
   </data>
   <data name="&gt;&gt;folderBrowserDialog1.Name" xml:space="preserve">
     <value>folderBrowserDialog1</value>

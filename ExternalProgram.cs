@@ -3,7 +3,7 @@ using SharpCompress.Archives;
 using SharpCompress.Archives.Zip;
 using SharpCompress.Common;
 
-namespace YoutubeSegmentDownloader;
+namespace YTSDownloader;
 
 public static class ExternalProgram
 {
