@@ -482,7 +482,7 @@
     <value>202, 41</value>
   </data>
   <data name="textBox_youtube.PlaceholderText" xml:space="preserve">
-    <value>( Paste any kind of Youtube link here )</value>
+    <value>( Paste a video URL or ID here )</value>
   </data>
   <data name="textBox_youtube.Size" type="System.Drawing.Size, System.Drawing">
     <value>571, 32</value>
@@ -491,7 +491,7 @@
     <value>1</value>
   </data>
   <data name="textBox_youtube.ToolTip" xml:space="preserve">
-    <value>Also accepts Youtube clips!</value>
+    <value>Accepts video URLs, IDs, and clip links</value>
   </data>
   <data name="&gt;&gt;textBox_youtube.Name" xml:space="preserve">
     <value>textBox_youtube</value>
@@ -967,8 +967,8 @@ https://github.com/yt-dlp/yt-dlp/releases/latest</value>
     <value>1</value>
   </data>
   <data name="hiddenlabel1.Text" xml:space="preserve">
-    <value>The video source you entered is not a Youtube link or a video ID.
-The program will hand this source directly to yt-dlp, which will most likely fail!</value>
+    <value>The input does not appear to be a recognized video URL or ID.
+The program will pass this source directly to yt-dlp, which may not succeed.</value>
   </data>
   <data name="hiddenlabel1.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1052,7 +1052,7 @@ The program will hand this source directly to yt-dlp, which will most likely fai
     <value>0</value>
   </data>
   <data name="comboBox_browser.ToolTip" xml:space="preserve">
-    <value>Select the browser where you are logged into your Youtube account.</value>
+    <value>Select the browser to import authentication cookies from.</value>
   </data>
   <data name="&gt;&gt;comboBox_browser.Name" xml:space="preserve">
     <value>comboBox_browser</value>
@@ -1079,7 +1079,7 @@ The program will hand this source directly to yt-dlp, which will most likely fai
     <value>Cookies from browser</value>
   </data>
   <data name="groupBox2.ToolTip" xml:space="preserve">
-    <value>This will extract the Youtube login status from the selected browser to obtain permission to access the video.</value>
+    <value>Import authentication cookies from the selected browser to access content that requires login.</value>
   </data>
   <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
     <value>groupBox2</value>
@@ -1415,7 +1415,7 @@ The program will hand this source directly to yt-dlp, which will most likely fai
     <value>0</value>
   </data>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>https://github.com/jamie-bear/YoutubeSegmentDownloader</value>
+    <value>https://github.com/jamie-bear/YTS-Downloader</value>
   </data>
   <data name="richTextBox1.ToolTip" xml:space="preserve">
     <value>In this link you can find everything about this software.</value>
