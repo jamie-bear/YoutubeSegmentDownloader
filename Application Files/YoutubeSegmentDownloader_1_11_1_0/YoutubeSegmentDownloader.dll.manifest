@@ -75,7 +75,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>hQtAC9IyKv80tioPksU64FzgQo6bLAA9m34y2h3goNY=</dsig:DigestValue>
+      <dsig:DigestValue>y2onGtWtW5bpwaL9a6REiHZO5S2kjQ3NUtD2Ho1VJPM=</dsig:DigestValue>
     </hash>
   </file>
   <file name="YoutubeSegmentDownloader.ico" size="270622">
